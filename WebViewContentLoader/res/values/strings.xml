@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Web View Content Loader</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Enter the URL to be loaded and click on Submit</string>
+    <string name="title_activity_intitial">IntitialActivity</string>
+    <string name="submit">Submit</string>
+    <string name="enter_the_url">Enter the URL</string>
+
+</resources>

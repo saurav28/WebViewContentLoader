@@ -7,5 +7,6 @@
     <string name="title_activity_intitial">IntitialActivity</string>
     <string name="submit">Submit</string>
     <string name="enter_the_url">Enter the URL</string>
+    <string name="choose_title">Choose application</string>
 
 </resources>

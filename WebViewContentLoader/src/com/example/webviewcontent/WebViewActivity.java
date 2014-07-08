@@ -63,7 +63,7 @@ public class WebViewActivity extends Activity
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			String extension = url.substring(url.lastIndexOf(".") + 1);
-			 if(extension.equals("mp4")||extension.equals("docx")||extension.equals("pdf")){//This takes the .mp4 player to be played outside the web view application
+			 if(extension.equals("mp4")||extension.equals("docx")){//This takes the .mp4 player to be played outside the web view application
 		          Intent i = new Intent(Intent.ACTION_VIEW);
 		         
 		          String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);

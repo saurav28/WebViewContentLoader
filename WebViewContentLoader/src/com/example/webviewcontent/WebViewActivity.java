@@ -1,7 +1,9 @@
 package com.example.webviewcontent;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.webkit.WebViewClient;
 public class WebViewActivity extends Activity
 {
 	public String TAG = "WebViewActivity";
+	private Activity activitiy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -27,7 +30,7 @@ public class WebViewActivity extends Activity
 			setContentView(R.layout.activity_web_view);
 
 			// get the intent
-
+			activitiy= this;
 			Intent intent = getIntent();
 			Uri webUri = intent.getData();
 			WebView webView = (WebView) findViewById(R.id.webview);
@@ -38,7 +41,7 @@ public class WebViewActivity extends Activity
 			webView.getSettings().setAllowFileAccess(true);
 			webView.setSoundEffectsEnabled(true);
 			webView.setWebViewClient(new CustomWebViewClient());
-			//webView.setWebChromeClient(new WebChromeClient());
+			webView.setWebChromeClient(new WebChromeClient());
 
 			Log.i(TAG, "User Agent used in the web view " + webViewSettings.getUserAgentString());
 			Log.i(TAG, "URL to be loaded " + webUri.toString());
@@ -59,6 +62,8 @@ public class WebViewActivity extends Activity
 
 	class CustomWebViewClient extends WebViewClient
 	{
+
+		private ProgressDialog webViewProgressDialog;
 
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -96,6 +101,24 @@ public class WebViewActivity extends Activity
 			super.onReceivedSslError(view, handler, error);
 			Log.e(TAG, "error while loading the url " + error.toString());
 		}
+		
+		@Override
+		public void onPageStarted(WebView view, String url, Bitmap favicon) {
+			// TODO Auto-generated method stub
+			super.onPageStarted(view, url, favicon);
+			webViewProgressDialog = new ProgressDialog(activitiy);
+			webViewProgressDialog.setTitle("Please wait");
+			webViewProgressDialog.setMessage("Page is loading..");
+			webViewProgressDialog.show();
+		}
+		
+		@Override
+		public void onPageFinished(WebView view, String url) {
+			// TODO Auto-generated method stub
+			super.onPageFinished(view, url);
+			webViewProgressDialog.dismiss();
+		}
 
 	}
+	
 }
